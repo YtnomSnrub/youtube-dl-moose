@@ -802,6 +802,8 @@
  - **soundcloud**
  - **soundcloud:playlist**
  - **soundcloud:search**: Soundcloud search
+ - **soundcloud:search:genre**: Soundcloud search by genre
+ - **soundcloud:search:tags**: Soundcloud search by tags
  - **soundcloud:set**
  - **soundcloud:trackstation**
  - **soundcloud:user**
