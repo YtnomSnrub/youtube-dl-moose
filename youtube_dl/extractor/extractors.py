@@ -1034,6 +1034,8 @@ from .soundcloud import (
     SoundcloudTrackStationIE,
     SoundcloudPlaylistIE,
     SoundcloudSearchIE,
+    SoundcloudSearchTagsIE,
+    SoundcloudSearchGenreIE,
 )
 from .soundgasm import (
     SoundgasmIE,

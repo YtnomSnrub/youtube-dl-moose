@@ -744,6 +744,7 @@ class SoundcloudSearchIE(SearchInfoExtractor, SoundcloudIE):
     _SEARCH_KEY = 'scsearch'
     _MAX_RESULTS_PER_PAGE = 200
     _DEFAULT_RESULTS_PER_PAGE = 50
+    _API_ENDPOINT = 'tracks'
 
     def _get_collection(self, endpoint, collection_id, **query):
         limit = min(
@@ -755,7 +756,7 @@ class SoundcloudSearchIE(SearchInfoExtractor, SoundcloudIE):
             'linked_partitioning': 1,
             'offset': 0,
         })
-        next_url = update_url_query(self._API_V2_BASE + endpoint, query)
+        next_url = update_url_query(self._API_BASE + endpoint, query)
 
         collected_results = 0
 
@@ -782,5 +783,27 @@ class SoundcloudSearchIE(SearchInfoExtractor, SoundcloudIE):
                 break
 
     def _get_n_results(self, query, n):
-        tracks = self._get_collection('search/tracks', query, limit=n, q=query)
+        tracks = self._get_collection(self._API_ENDPOINT, query, limit=n, q=query)
+        return self.playlist_result(tracks, playlist_title=query)
+
+
+class SoundcloudSearchTagsIE(SoundcloudSearchIE):
+    IE_NAME = SoundcloudSearchIE.IE_NAME + ':tags'
+    _SEARCH_KEY = 'scsearchtags'
+    IE_DESC = 'Soundcloud search by tags'
+    _API_ENDPOINT = 'tracks'
+
+    def _get_n_results(self, query, n):
+        tracks = self._get_collection(self._API_ENDPOINT, query, limit=n, q="", tags=query)
+        return self.playlist_result(tracks, playlist_title=query)
+
+
+class SoundcloudSearchGenreIE(SoundcloudSearchIE):
+    IE_NAME = SoundcloudSearchIE.IE_NAME + ':genre'
+    _SEARCH_KEY = 'scsearchgenre'
+    IE_DESC = 'Soundcloud search by genre'
+    _API_ENDPOINT = 'tracks'
+
+    def _get_n_results(self, query, n):
+        tracks = self._get_collection(self._API_ENDPOINT, query, limit=n, q="", genres=query)
         return self.playlist_result(tracks, playlist_title=query)
