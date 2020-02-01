@@ -1006,8 +1006,8 @@
  - **Vidzi**
  - **vier**: vier.be and vijf.be
  - **vier:videos**
- - **ViewLift**
- - **ViewLiftEmbed**
+ - **viewlift**
+ - **viewlift:embed**
  - **Viidea**
  - **viki**
  - **viki:channel**
